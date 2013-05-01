@@ -8,7 +8,6 @@ $ = jQuery
 $.fn.extend({
   chosen: (options) ->
     ua = navigator.userAgent.toLowerCase();
-
     match = /(msie) ([\w.]+)/.exec( ua ) || [];
 
     browser =
@@ -499,9 +498,8 @@ class Chosen extends AbstractChosen
     no_results_html.find("span").first().html(terms)
 
     @search_results.append no_results_html
-
     if @create_option
-      this.show_create_option( terms )
+      this.show_create_option terms
 
   show_create_option: (terms) ->
     create_option_html = $('<li class="create-option active-result"><a href="javascript:void(0);">' + @create_option_text + '</a>: "' + terms + '"</li>')
@@ -516,12 +514,11 @@ class Chosen extends AbstractChosen
     else
       this.select_append_option {value: terms, text: terms}
 
-  select_append_option: ( options ) ->
-    option = $('<option />', options ).attr('selected', 'selected')
+  select_append_option: (options) ->
+    attributes = $.extend({}, options, selected: 1)
+    option = $('<option />', attributes)
     @form_field_jq.append option
     @form_field_jq.trigger "liszt:updated"
-    #@active_field = false
-    @search_field.trigger('focus')
 
   no_results_clear: ->
     @search_results.find(".no-results").remove()
