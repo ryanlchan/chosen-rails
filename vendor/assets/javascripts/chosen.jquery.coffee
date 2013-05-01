@@ -503,6 +503,7 @@ class Chosen extends AbstractChosen
 
   show_create_option: (terms) ->
     create_option_html = $('<li class="create-option active-result"><a href="javascript:void(0);">' + @create_option_text + '</a>: "' + terms + '"</li>')
+    @create_option_clear()
     @search_results.append create_option_html
 
   create_option_clear: ->

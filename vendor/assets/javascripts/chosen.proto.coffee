@@ -40,7 +40,7 @@ class Chosen extends AbstractChosen
       'class': container_classes.join ' '
       'style': 'width: ' + (@f_width) + 'px' #use parens around @f_width so coffeescript doesn't think + ' px' is a function parameter
       'title': @form_field.title
-    
+
     base_template = if @is_multiple then new Element('div', container_props).update( @multi_temp.evaluate({ "default": @default_text}) ) else new Element('div', container_props).update( @single_temp.evaluate({ "default":@default_text }) )
 
     @form_field.hide().insert({ after: base_template })
@@ -166,7 +166,7 @@ class Chosen extends AbstractChosen
       @selected_item.addClassName("chzn-default").down("span").update(@default_text)
       if @create_option and not @disable_search
         @container.removeClassName "chzn-container-single-nosearch"
-      else if @disable_search or @form_field.options.length <= @disable_search_threshold 
+      else if @disable_search or @form_field.options.length <= @disable_search_threshold
         @container.addClassName "chzn-container-single-nosearch"
 
     content = ''
@@ -481,6 +481,7 @@ class Chosen extends AbstractChosen
       this.show_create_option( terms )
 
   show_create_option: (terms) ->
+    @create_option_clear()
     @search_results.insert @create_option_temp.evaluate( text: @create_option_text, terms: terms )
 
   create_option_clear: ->
